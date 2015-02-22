@@ -52,7 +52,15 @@ a)
         (else (+ (sq y) (cond ((> x z) (sq x)) (else (sq z))))))
 )
 
-;; Exercise 1.4 - wincred test, again
+;; Exercise 1.4
+;;(define (a-plus-abs-b a b)
+;;  ((if (> b 0) + -) a b))
+;; The if combination determines the operation on a and b
+;; if b is a negative number, ie less than zero, then the operation
+;; is the difference between a and -b
+;; else, the + operator is used
+
+;; Exercise 1.5
 
 
 
