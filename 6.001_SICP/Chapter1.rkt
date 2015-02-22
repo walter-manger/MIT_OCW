@@ -45,8 +45,10 @@ a)
 ;; Exercise 1.2
 (/ (+ 5 4 (- 2 (- 3 (+ 6 (/ 4 5))))) (* 3 (- 6 2) (- 2 7)))
 
-;; Exercise 
-(define (square s) (* s s))
-(define (sum-two-largest x y z) (
-                                 (+ (square 2) (square 2))
-                                 ))
+;; Exercise 1.3
+(define (sum-two-largest x y z) 
+  (cond ((> x y)  (+ (* x x) (cond ((> y z) (* y y)) (else (* z z)))))
+        (else (+ (* y y) (cond ((> x z) (* x x)) (else (* z z))))))
+)
+
+
