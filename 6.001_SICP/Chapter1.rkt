@@ -47,8 +47,11 @@ a)
 
 ;; Exercise 1.3
 (define (sum-two-largest x y z) 
-  (cond ((> x y)  (+ (* x x) (cond ((> y z) (* y y)) (else (* z z)))))
-        (else (+ (* y y) (cond ((> x z) (* x x)) (else (* z z))))))
+  (define (sq a) (* a a))
+  (cond ((> x y)  (+ (sq x) (cond ((> y z) (sq y)) (else (sq z)))))
+        (else (+ (sq y) (cond ((> x z) (sq x)) (else (sq z))))))
 )
+
+;; Exercise 1.4
 
 
