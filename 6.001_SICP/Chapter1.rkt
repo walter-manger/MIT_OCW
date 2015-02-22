@@ -52,6 +52,6 @@ a)
         (else (+ (sq y) (cond ((> x z) (sq x)) (else (sq z))))))
 )
 
-;; Exercise 1.4
+;; Exercise 1.4 - wincred test
 
 
