@@ -62,10 +62,10 @@ a)
 ;; else, the + operator is used
 
 ;; Exercise 1.5
-(define (p) (p))
-(define (test x y)
-(if (= x 0) 0 y))
-(test 0 (p))
+;(define (p) (p))
+;(define (test x y)
+;   (if (= x 0) 0 y))
+;(test 0 (p))
 
 ;; Applicative-Order: Eval [the arguments] and [then] Apply. 
 ;; To apply a compound procedure to arguments, 
@@ -83,7 +83,7 @@ a)
 
 ; Normal-Order Applied
 ; (test 0 (p))
-; (if (= 0 0) 0 (p))      ; 
+; (if (= 0 0) 0 (p))
 ; (if true 0 (p))        
 ; 0
 ; Short Cicuits because the predicate is evaluated first, 
@@ -109,6 +109,54 @@ a)
 ; regardless if it is truly needed or not.
 ; As a result, there will be a non-terminated procedure call to sqrt-iter
 
-;; Exercise 1.7
+;; Exercise 1.7 (Failed)
+(define (square x) 
+  (* x x))
+
+(define (sqrt-iter guess x)
+  (if (good-enough? guess x)
+      guess
+      (sqrt-iter (improve guess x) x)))
+
+(define (improve guess x)
+  (average guess (/ x guess)))
+
+(define (average x y)
+  (/ (+ x y) 2))
+
+(define (good-enough? guess x)
+  (< (abs (- (square guess) x)) 0.001))
+
+(sqrt-iter 1 0.0002)
+(sqrt 0.0002)
+
+;; 0.001 is not small enough to represent the differences beyond that number.
+;; For example, if x = 0.0001, the 0.001 does not account for differences 
+;; less than 0.001, and therefore yeilds an incorrect result
+
+;(sqrt-iter 1 9876000)
+;(sqrt 9876000)
+
+;; Takes way too long to run and while the answer is closer to being correct, 
+;; the good-enough? procedure does not have the ability to identify large differences.
+(define (good-enough-alt? guess prev_guess)
+  (< (abs (/ (- guess prev_guess) guess)) 0.001))
+
+(define (sqrt-iter-alt prev_guess guess x)
+  (if (good-enough-alt? guess prev_guess) guess
+      (sqrt-iter-alt guess (improve guess x) x)))
 
 
+(sqrt-iter-alt 0.0 1.0 9898989898989898)
+(sqrt 9898989898989898)
+
+
+;; Exercise 1.8
+(define (improve-cube guess x)
+  (/ (+ (/ x (square guess)) (* 2 guess)) 3)) 
+
+(define (cube-root prev_guess guess x)
+  (if (good-enough-alt? guess prev_guess) guess
+      (cube-root guess (improve-cube guess x) x)))
+  
+(cube-root 0.0 1.0 8)
