@@ -329,7 +329,43 @@ a)
 ;                           [1] [2] [3]...[n-1] [n]
 ; (define (k n) (* 5 n n)) => 5n^2
 
+; Tree Recursion Chapter Problem
+;(define (count-change amount) (cc amount 5))
+;
+;(define (cc amount kinds-of-coins)
+;  (cond ((= amount 0) 1)
+;        ((or (< amount 0) (= kinds-of-coins 0)) 0)
+;        (else (+ (cc amount (- kinds-of-coins 1))
+;                 (cc (- amount
+;                        (first-denomination kinds-of-coins))
+;                     kinds-of-coins)))))
+;
+;(define (first-denomination kinds-of-coins)
+;  (cond ((= kinds-of-coins 1) 1)
+;        ((= kinds-of-coins 2) 5)
+;        ((= kinds-of-coins 3) 10)
+;        ((= kinds-of-coins 4) 25)
+;        ((= kinds-of-coins 5) 50)))
+;
+;(count-change 10)
 
+; Exercise 1.11
+(define (ex11 n)
+  (if (< n 3) n
+      (+ (ex11 (- n 1)) (* 2 (ex11 (- n 2))) (* 3 (ex11 (- n 3))))))
+
+(define (ex11a n)
+  (if (< n 3) n
+  (ex11-iter 2 1 0 n)))
+
+(define (ex11-iter a b c count)
+  (if (< count 3) a
+      (ex11-iter (+ a (* 2 b) (* 3 c)) a b (- count 1))
+      )
+  )
+
+(ex11 5)
+(ex11a 5)
 
 
 
