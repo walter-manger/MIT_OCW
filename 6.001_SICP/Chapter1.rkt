@@ -368,4 +368,16 @@ a)
 (ex11a 5)
 
 
+; Exercise 1.12
+(define (pascal row col)
+  (cond ((< row 1) 0)
+        ((< col 1) 0)
+        ((> col row) 0)
+        ((or (= col 1) (= col row)) 1)
+        (else (+ (pascal (- row 1) (- col 1)) (pascal (- row 1) col))))
+)
+
+(pascal 3 2)
+
+
 
